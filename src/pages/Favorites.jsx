@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import MovieGrid from '../components/MovieGrid';
+import { getFavorites } from '../utils/favorites';
 
 function Favorites() {
-  // Placeholder - students will implement localStorage retrieval
-  const favoriteMovies = [];
+  const [favoriteMovies, setFavoriteMovies] = useState(getFavorites());
 
   return (
     <main className="main-content">
@@ -11,7 +12,10 @@ function Favorites() {
         <p>Your saved movies collection</p>
       </div>
       {favoriteMovies.length > 0 ? (
-        <MovieGrid movies={favoriteMovies} />
+        <MovieGrid
+          movies={favoriteMovies}
+          onFavoriteChange={() => setFavoriteMovies(getFavorites())}
+        />
       ) : (
         <div className="empty-state">
           <p>No favorite movies yet. Start adding some from the home page!</p>
@@ -19,6 +23,6 @@ function Favorites() {
       )}
     </main>
   );
-};
+}
 
 export default Favorites;
